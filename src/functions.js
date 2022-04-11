@@ -1,30 +1,30 @@
 const { connectDb } = require('./connect-db');
 
-const productRef = connectDb().collection('products');
+const itemRef = connectDb().collection('items');
 
-exports.addProduct = (req, res) => {
-    const product = {
+exports.addItem = (req, res) => {
+    const item = {
         item: req.body.item,
         quantity: req.body.quantity
     }
-    return productRef
-    .add(product)
+    return itemRef
+    .add(item)
     .then(() => res.send({
         message: 'Successful'
     }))
     .catch(console.error);
 }
 
-exports.getProducts = (req, res) => {
-    return productRef
+exports.getItems = (req, res) => {
+    return itemRef
     .get()
     .then((snapshot) => {
-        const productList = snapshot.docs.map((doc) => {
-            let product = doc.data();
-            product.id = doc.id;
-            return product;
+        const itemList = snapshot.docs.map((doc) => {
+            let item = doc.data();
+            item.id = doc.id;
+            return item;
         })
-        res.send(productList);
+        res.send(itemList);
     })
     .catch((err) => res.status(500).send(err));
 };

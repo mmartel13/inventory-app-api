@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { addProduct, getProducts } = require('./functions');
+const { addItem, getItems } = require('./functions');
 const PORT = process.env.PORT || 3000;
 
 const app = express();
@@ -11,9 +11,9 @@ app.get('/', (req, res) => {
     res.send('Good Job')
 });
 
-app.post('/add-product', addProduct);
+app.post('/add-item', addItem);
 
-app.get('/products', getProducts);
+app.get('/items', getItems);
 
 app.listen(PORT, () => {
     console.log('Listening on Port: ', PORT);
